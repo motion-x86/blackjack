@@ -1,49 +1,12 @@
 import React, { Fragment, useReducer } from 'react';
-import styled from '@emotion/styled';
 
-import { PlayingCard } from './PlayingCard';
-import { Spacer } from '../Shared/Spacer';
+import { PlayingCard } from '../PlayingCard/PlayingCard';
+import { Alert } from '../shared/Alert';
 
 import { Deck, PlayerHand } from '../../game/game';
 import { NEW_GAME, HIT, STAY, newGame, hit, stay } from '../../actions/actions';
 
-const Container = styled('div')({
-    display: 'inline-block'
-});
-
-const MenuContainer = styled('div')({
-    padding: '16px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-});
-
-const Menu = styled('div')({
-    display: 'flex',
-    button: {
-        width: '100px',
-        padding: '8px 12px'
-    }
-});
-
-const Cards = styled('div')({
-    padding: '16px 0',
-    display: 'flex'
-});
-
-const Score = styled('div')({
-    fontWeight: 600
-});
-
-const Alert = styled('div')(props => ({
-    padding: '16px 0',
-    margin: '0 16px',
-    fontWeight: 600,
-    fontSize: '24px',
-    textAlign: 'center',
-    backgroundColor: props.bgColor,
-    color: 'white'
-}));
+import styles from './BlackJackHand.module.scss';
 
 function init() {
     const deck = new Deck();
@@ -72,35 +35,31 @@ const BlackJackHand = () => {
     const [state, dispatch] = useReducer(reducer, {}, init);
 
     return (
-        <Container>
-            {state.hand.isBust && <Alert bgColor="red">Bust!</Alert>}
-            {state.hand.isBlackJack && <Alert bgColor="green">Black Jack!</Alert>}
-            <Cards>
-                <Spacer />
+        <div className={styles.Container}>
+            {state.hand.isBust && <Alert type="critical">Bust!</Alert>}
+            {state.hand.isBlackJack && <Alert type="success">Black Jack!</Alert>}
+            <div className={styles.Cards}>
                 {state.hand.cards.map(card => (
                     <Fragment key={card.code}>
                         <PlayingCard card={card} />
-                        <Spacer />
                     </Fragment>
                 ))}
-            </Cards>
-            <MenuContainer>
-                <Menu>
+            </div>
+            <div className={styles.MenuContainer}>
+                <div className={styles.Menu}>
                     <button type="button" onClick={() => dispatch(hit())} disabled={state.hand.isFinished}>
                         Hit
                     </button>
-                    <Spacer />
                     <button type="button" onClick={() => dispatch(stay())} disabled={state.hand.isFinished}>
                         Stay
                     </button>
-                    <Spacer />
                     <button type="button" onClick={() => dispatch(newGame())} disabled={!state.hand.isFinished}>
                         New Game
                     </button>
-                </Menu>
-                <Score>Score: {state.hand.score}</Score>
-            </MenuContainer>
-        </Container>
+                </div>
+                <strong>Score: {state.hand.score}</strong>
+            </div>
+        </div>
     );
 };
 

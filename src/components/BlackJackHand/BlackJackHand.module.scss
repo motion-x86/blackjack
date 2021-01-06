@@ -1,0 +1,23 @@
+.Container {
+    display: inline-block;
+}
+
+.MenuContainer {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Menu {
+    display: flex;
+    button {
+        width: 100px;
+        padding: 8px 12px;
+    }
+}
+
+.Cards {
+    display: flex;
+    padding: 16px 0;
+}

@@ -152,7 +152,6 @@ test('Player ones loses if they bust', () => {
 });
 
 test('Player ones wins if they blackjack', () => {
-    const nine = new Card('CLUBS', 9);
     const ten = new Card('HEARTS', 10);
     const jack = new Card('SPADES', 'Jack');
     const ace = new Card('CLUBS', 'Ace');
