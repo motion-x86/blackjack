@@ -1,0 +1,22 @@
+.Container {
+    padding: 16px;
+    font-weight: 600;
+    font-size: 24px;
+    text-align: center;
+    color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.175);
+}
+
+.critical {
+    background-color: #e53f3f;
+}
+
+.success {
+    background-color: #000000;
+}
+
+.default {
+    background-color: #dddddd;
+    color: #000000;
+}
