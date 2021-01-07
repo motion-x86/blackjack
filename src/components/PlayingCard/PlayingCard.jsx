@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const PlayingCard = ({ card, faceUp }) => {
+    const code = faceUp ? card.code : 'XX';
+
     return (
         <div>
-            {faceUp ? (
-                <img alt={card.toString()} src={`https://deckofcardsapi.com/static/img/${card.code}.png`} />
-            ) : (
-                <img alt={card.toString()} src={`https://deckofcardsapi.com/static/img/XX.png`} />
-            )}
+            <img alt={card.toString()} src={`https://deckofcardsapi.com/static/img/${code}.png`} />
         </div>
     );
 };

@@ -74,11 +74,14 @@ const BlackJackHand = () => {
                 </div>
             )}
             <div className={styles.ScoreContainer}>
-                <div className={styles.Score}>{state.player.score}</div>
+                <div className={styles.Score}>
+                    {state.player.score}
+                    <span></span>
+                </div>
             </div>
             <div className={styles.Cards}>
                 {state.player.cards.map((card, index) => (
-                    <div key={card.code} style={{ marginLeft: index == 0 ? 0 : '-140px' }}>
+                    <div key={card.code} className={styles.Card}>
                         <PlayingCard card={card} />
                     </div>
                 ))}

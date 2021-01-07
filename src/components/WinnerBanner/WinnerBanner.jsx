@@ -16,20 +16,24 @@ const WinnerBanner = ({ winner, onNewHandClick }) => {
                 return { type: 'success', text: 'Player Wins' };
             case PUSH:
                 return { type: 'default', text: 'Push', buttonClass: styles.PushButton };
+            default:
+                return { type: 'default', text: '' };
         }
     }
 
     const details = getDetails(winner);
 
     return (
-        <Alert type={details.type}>
-            <div>{details.text}</div>
-            <div>
-                <Button onClick={onNewHandClick} classes={details.buttonClass}>
-                    New Hand
-                </Button>
-            </div>
-        </Alert>
+        <div className={styles.Container}>
+            <Alert type={details.type}>
+                <div className={styles.Header}>{details.text}</div>
+                <div className={styles.ButtonContainer}>
+                    <Button onClick={onNewHandClick} classes={details.buttonClass}>
+                        New Hand
+                    </Button>
+                </div>
+            </Alert>
+        </div>
     );
 };
 
