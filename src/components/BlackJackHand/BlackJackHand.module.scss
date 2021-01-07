@@ -1,5 +1,33 @@
 .Container {
-    display: inline-block;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: #2f6f26;
+}
+
+.ScoreContainer {
+    padding: 16px;
+    padding-right: 0;
+    margin-right: -16px;
+}
+
+.Score {
+    background-color: #000000;
+    color: #ffffff;
+    margin-top: 2px;
+    padding: 8px 16px;
+    padding-right: 32px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.WinnerBannerContainer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60%;
 }
 
 .MenuContainer {
@@ -9,15 +37,21 @@
     align-items: center;
 }
 
-.Menu {
-    display: flex;
-    button {
-        width: 100px;
-        padding: 8px 12px;
-    }
-}
-
 .Cards {
     display: flex;
     padding: 16px 0;
+}
+
+.Spacer {
+    width: 8px;
+    min-width: 8px;
+    display: inline-block;
+}
+
+.HitButton {
+    background-color: #417ef4;
+}
+
+.StayButton {
+    background-color: #ea8441;
 }
