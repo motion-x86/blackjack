@@ -72,10 +72,11 @@ Once the player hand is finished, it's the dealer's turn. The dealer hand will n
 
 ## Deliverables
 
--   fork the exercise repository to your personal Github account
--   complete the exercise
--   create a pull request against your forked Github repository
--   let us know when you are ready to review
+- import the exercise repository to your personal Github account using [github's import tool](https://github.com/new/import) import this url: https://github.com/FieldLevel/frontend-exercise-blackjack
+- complete the exercise
+- invite our github user "fl-codereview" to be a collaborator on the repository
+- create a pull request against your Github repository
+- let us(your interview coordinator) know when you are ready to review
 
 ## How To Run
 
