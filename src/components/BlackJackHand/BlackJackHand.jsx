@@ -15,7 +15,9 @@ function init() {
     const dealerCards = [];
 
     playerCards.push(deck.dealCard());
-    dealerCards.push(deck.dealCard());
+    const dealerFirstCard = deck.dealCard();
+    console.log(`Dealer is showing ${dealerFirstCard}`);
+    dealerCards.push(dealerFirstCard);
     playerCards.push(deck.dealCard());
     dealerCards.push(deck.dealCard());
 
