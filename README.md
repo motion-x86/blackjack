@@ -1,68 +1,96 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description
 
-## Available Scripts
+You will be provided with the desktop version of a single player blackjack app. Your job will be to expand the current functionality to support a player and a dealer. You will also add a scoreboard that tracks wins, losses, and pushes. A mockup of the final version is provider [here](/assets/blackjack_spec.png)
 
-In the project directory, you can run:
+-   Make it match the provided mockup which includes mobile version.
+-   Add UI components to show the dealer's hand. When the hand is initially dealt, the dealer should have one card showing and one card face down. When it is the dealer's turn, all cards should be shown.
+-   Add a scoreboard that tracks the wins, losses, and pushes for the player
+-   Make API calls to load scoreboard data & save scores
 
-### `yarn start`
+## API Documentation
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Score
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+To get the current score
 
-### `yarn test`
+#### Request
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+GET /api/score
+```
 
-### `yarn build`
+#### Response
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```javascript
+{
+    player: 1,
+    dealer: 2,
+    push: 0
+}
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Update Score
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To update the score
 
-### `yarn eject`
+#### Request
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+POST /api/score
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Post body
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```javascript
+{
+    result: 'player' | 'dealer' | 'push';
+}
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Response
 
-## Learn More
+```javascript
+{
+    player: 1,
+    dealer: 2,
+    push: 0
+}
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Blackjack Rules For This Application
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Each player is dealt two cards. The dealer will have one card showing and one card face down.
+The value of cards two through ten is their pip value (2 through 10). Face cards (Jack, Queen, and King) are all worth ten. Aces can be worth one or eleven. A hand's value is the sum of the card values.
 
-### Code Splitting
+Once the player hand is finished, it's the dealer's turn. The dealer hand will not be completed if the player has busted or received a blackjack. The dealer then reveals the hidden card and must hit until the cards total up to 17 points. At 17 points or higher the dealer must stay. You are betting that you have a better hand than the dealer. The better hand is the hand where the sum of the card values is closer to 21 without exceeding 21. The detailed outcome of the hand follows:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+-   If the player is dealt an Ace and a ten-value card (called a "blackjack" or "natural"), and the dealer does not, the player wins
+-   If the player exceeds a sum of 21 ("busts"), the player loses
+-   If the dealer exceeds 21 ("busts") and the player does not, the player wins.
+-   If the player attains a final sum higher than the dealer and does not bust, the player wins.
+-   If both dealer and player receive a blackjack or any other hands with the same sum called a "push", no one wins.
 
-### Analyzing the Bundle Size
+## Deliverables
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+-   fork the exercise repository to your personal Github account
+-   complete the exercise
+-   create a pull request against your forked Github repository
+-   let us know when you are ready to review
 
-### Making a Progressive Web App
+## How To Run
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Install project dependencies
 
-### Advanced Configuration
+`npm install`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Start the API server
 
-### Deployment
+`npm run server`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Start the web application
 
-### `yarn build` fails to minify
+`npm run start`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+To run the test suite
+
+`npm run test`

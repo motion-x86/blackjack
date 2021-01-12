@@ -1,19 +1,51 @@
-import React, { Fragment, useReducer } from 'react';
+import React, { useReducer } from 'react';
 
 import { PlayingCard } from '../PlayingCard/PlayingCard';
-import { Alert } from '../shared/Alert';
+import { WinnerBanner } from '../WinnerBanner/WinnerBanner';
+import { Button } from '../shared/Button/Button';
 
-import { Deck, PlayerHand } from '../../game/game';
+import { Deck, PlayerHand, BlackJack } from '../../game/game';
 import { NEW_GAME, HIT, STAY, newGame, hit, stay } from '../../actions/actions';
 
 import styles from './BlackJackHand.module.scss';
 
 function init() {
     const deck = new Deck();
-    return {
+    const playerCards = [];
+    const dealerCards = [];
+
+    playerCards.push(deck.dealCard());
+    const dealerFirstCard = deck.dealCard();
+    console.log(`Dealer is showing ${dealerFirstCard}`);
+    dealerCards.push(dealerFirstCard);
+    playerCards.push(deck.dealCard());
+    dealerCards.push(deck.dealCard());
+
+    const player = new PlayerHand(false, playerCards);
+    const dealer = new PlayerHand(true, dealerCards);
+
+    const initialState = {
         deck: deck,
-        hand: new PlayerHand(false, [deck.dealCard(), deck.dealCard()])
+        player: player,
+        dealer: dealer,
+        winner: null
     };
+
+    calculateWinner(initialState);
+    return initialState;
+}
+
+function calculateWinner(state) {
+    if (state.player.isFinished) {
+        if (!state.player.isBust) {
+            while (!state.dealer.isFinished) {
+                state.dealer.addCard(state.deck.dealCard());
+            }
+            console.log(`Dealer score: ${state.dealer.score}`);
+        }
+
+        state.winner = BlackJack.calculateWinner(state.player, state.dealer);
+    }
 }
 
 function reducer(state, action) {
@@ -21,10 +53,12 @@ function reducer(state, action) {
         case NEW_GAME:
             return init();
         case HIT:
-            state.hand.addCard(state.deck.dealCard());
+            state.player.addCard(state.deck.dealCard());
+            calculateWinner(state);
             return { ...state };
         case STAY:
-            state.hand.stay();
+            state.player.stay();
+            calculateWinner(state);
             return { ...state };
         default:
             console.log('noop');
@@ -36,28 +70,42 @@ const BlackJackHand = () => {
 
     return (
         <div className={styles.Container}>
-            {state.hand.isBust && <Alert type="critical">Bust!</Alert>}
-            {state.hand.isBlackJack && <Alert type="success">Black Jack!</Alert>}
+            {state.winner && (
+                <div className={styles.WinnerBannerContainer}>
+                    <WinnerBanner winner={state.winner} onNewHandClick={() => dispatch(newGame())}></WinnerBanner>
+                </div>
+            )}
+            <div className={styles.ScoreContainer}>
+                <div className={styles.Score}>
+                    {state.player.score}
+                    <span></span>
+                </div>
+            </div>
             <div className={styles.Cards}>
-                {state.hand.cards.map(card => (
-                    <Fragment key={card.code}>
+                {state.player.cards.map((card, index) => (
+                    <div key={card.code} className={styles.Card}>
                         <PlayingCard card={card} />
-                    </Fragment>
+                    </div>
                 ))}
             </div>
             <div className={styles.MenuContainer}>
-                <div className={styles.Menu}>
-                    <button type="button" onClick={() => dispatch(hit())} disabled={state.hand.isFinished}>
+                <div>
+                    <Button
+                        onClick={() => dispatch(hit())}
+                        disabled={state.player.isFinished}
+                        classes={styles.HitButton}
+                    >
                         Hit
-                    </button>
-                    <button type="button" onClick={() => dispatch(stay())} disabled={state.hand.isFinished}>
+                    </Button>
+                    <div className={styles.Spacer}></div>
+                    <Button
+                        onClick={() => dispatch(stay())}
+                        disabled={state.player.isFinished}
+                        classes={styles.StayButton}
+                    >
                         Stay
-                    </button>
-                    <button type="button" onClick={() => dispatch(newGame())} disabled={!state.hand.isFinished}>
-                        New Game
-                    </button>
+                    </Button>
                 </div>
-                <strong>Score: {state.hand.score}</strong>
             </div>
         </div>
     );

@@ -1,5 +1,40 @@
 .Container {
-    display: inline-block;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: #2f6f26;
+    padding: 64px 48px;
+}
+
+.ScoreContainer {
+    padding: 16px;
+    padding-right: 0;
+    margin-right: -10px;
+}
+
+.Score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    color: #ffffff;
+    margin-top: 2px;
+    width: 80px;
+    height: 40px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    font-size: 24px;
+    font-weight: 700;
+
+    span {
+        width: 10px;
+    }
+}
+
+.WinnerBannerContainer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .MenuContainer {
@@ -9,15 +44,29 @@
     align-items: center;
 }
 
-.Menu {
-    display: flex;
-    button {
-        width: 100px;
-        padding: 8px 12px;
-    }
-}
-
 .Cards {
     display: flex;
     padding: 16px 0;
+}
+
+.Card {
+    margin-left: 0;
+
+    + .Card {
+        margin-left: -140px;
+    }
+}
+
+.Spacer {
+    width: 8px;
+    min-width: 8px;
+    display: inline-block;
+}
+
+.HitButton {
+    background-color: #417ef4;
+}
+
+.StayButton {
+    background-color: #ea8441;
 }

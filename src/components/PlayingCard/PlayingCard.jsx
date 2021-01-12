@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const PlayingCard = ({ card, faceUp }) => {
-    const [isFaceUp, setIsFaceUp] = useState(faceUp);
+    const code = faceUp ? card.code : 'XX';
 
     return (
-        <div onClick={() => setIsFaceUp(!isFaceUp)}>
-            {isFaceUp ? (
-                <img alt={card.toString()} src={`https://deckofcardsapi.com/static/img/${card.code}.png`} />
-            ) : (
-                <img alt={card.toString()} src={`https://deckofcardsapi.com/static/img/XX.png`} />
-            )}
+        <div>
+            <img alt={card.toString()} src={`https://deckofcardsapi.com/static/img/${code}.png`} />
         </div>
     );
 };
