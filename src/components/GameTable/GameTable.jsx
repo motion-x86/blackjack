@@ -10,8 +10,9 @@ import { NEW_GAME, HIT, STAY, UPDATE_SCORE_BOARD, hit, stay, newGame, updateScor
 import { getScore, postScore, gameOutcomes } from '../../api';
 
 import styles from './GameTable.module.scss';
+import { number } from 'prop-types';
 
-function init() {
+function init(scoreBoard) {
     const deck = new Deck();
     const playerCards = [];
     const dealerCards = [];
@@ -33,10 +34,11 @@ function init() {
         dealer: dealer,
         showDealerFirstCard: false,
         winner: null,
-        scoreBoard: { win: 0, loose: 0, push: 0 }
+        scoreBoard
     };
 
     calculateWinner(initialState);
+
     return initialState;
 }
 
@@ -59,7 +61,7 @@ function calculateWinner(state) {
 function reducer(state, action) {
     switch (action.type) {
         case NEW_GAME:
-            return init();
+            return init(state.scoreBoard);
         case HIT:
             state.player.addCard(state.deck.dealCard());
             calculateWinner(state);
@@ -75,20 +77,27 @@ function reducer(state, action) {
     }
 }
 
-const saveScore = winner => {
+const saveScore = (winner, dispatch) => {
     if (winner) {
+        let payload = null;
         switch (winner) {
             case PLAYER_ONE:
-                postScore(gameOutcomes.playerWins);
+                payload = gameOutcomes.playerWins;
                 break;
             case DEALER:
-                postScore(gameOutcomes.dealerWins);
+                payload = gameOutcomes.dealerWins;
                 break;
             case PUSH:
-                postScore(gameOutcomes.push);
+                payload = gameOutcomes.push;
                 break;
             default:
                 console.log('Unknown Winner');
+        }
+
+        if (payload) {
+            postScore(payload).then(resp =>
+                dispatch(updateScoreBoard({ win: resp.player, loose: resp.dealer, push: resp.push }))
+            );
         }
     }
     console.log('saving score, winner is:', winner);
@@ -106,9 +115,9 @@ const loadScores = dispatch => {
 const GameTable = () => {
     const [state, dispatch] = useReducer(reducer, {}, init);
 
-    useEffect(() => loadScores(dispatch), [state.winner]);
+    useEffect(() => loadScores(dispatch), []);
 
-    useEffect(() => saveScore(state.winner), [state.winner]);
+    useEffect(() => saveScore(state.winner, dispatch), [state.winner]);
 
     return (
         <div className={styles.Container}>
