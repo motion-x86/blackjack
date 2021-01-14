@@ -122,6 +122,7 @@ const GameTable = () => {
             </div>
             <div className={styles.HandsContainer}>
                 <BlackJackHand player={state.dealer} showFirstCard={state.showDealerFirstCard} />
+                <div className={styles.CardSpacer} />
                 <BlackJackHand player={state.player} dispatch={dispatch} />
             </div>
             <div className={styles.ControlsContainer}>

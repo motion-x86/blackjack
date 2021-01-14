@@ -1,6 +1,12 @@
+$mobile: 376px;
+
 .Container {
     width: 480px;
     padding: 24px 0 32px 0;
+
+    @media screen and (max-width: $mobile) {
+        width: 320px;
+    }
 }
 
 .Header {

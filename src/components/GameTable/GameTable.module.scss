@@ -1,4 +1,4 @@
-$small: 376px;
+$mobile: 376px;
 
 .Container {
     position: relative;
@@ -10,12 +10,13 @@ $small: 376px;
 
     width: 100vw;
     height: 100%;
+    height: 100vh;
     min-height: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: hidden;
 
-    @media screen and (max-width: $small) {
+    @media screen and (max-width: $mobile) {
         flex-direction: column;
         justify-content: flex-start;
         padding: 0px 0px;
@@ -24,15 +25,21 @@ $small: 376px;
 
 .WinnerBannerContainer {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: calc(50% - 60px);
+    left: calc(50% - 240px);
+    // transform: translateY(-50%);
     z-index: 1000;
+
+    @media screen and (max-width: $mobile) {
+        left: calc(50% - 160px);
+    }
 }
 
 .ControlsContainer {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    max-height: 450px;
 }
 
 .ScoreBoardContainer {
@@ -45,4 +52,16 @@ $small: 376px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    @media screen and (max-width: $mobile) {
+        padding-top: 16px;
+        padding-left: 24px;
+        justify-content: flex-start;
+    }
+}
+
+.CardSpacer {
+    height: 88px;
+    @media screen and (max-width: $mobile) {
+        height: 48px;
+    }
 }

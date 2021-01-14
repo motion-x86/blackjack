@@ -1,3 +1,5 @@
+$mobile: 376px;
+
 .Container {
     position: relative;
     display: flex;
@@ -9,14 +11,13 @@
 .HandContainer {
     position: relative;
     display: flex;
-    justify-content: center;
-    padding: 64px 48px;
+    justify-content: left;
 }
 
 .ScoreContainer {
     padding: 16px;
     padding-right: 0;
-    margin-right: -10px;
+    margin-right: -4px;
 }
 
 .Score {
@@ -25,7 +26,6 @@
     align-items: center;
     background-color: #000000;
     color: #ffffff;
-    margin-top: 2px;
     width: 80px;
     height: 40px;
     border-top-left-radius: 4px;
@@ -44,9 +44,9 @@
 }
 
 .Card {
-    margin-left: 0;
+    margin-left: 0px;
 
     + .Card {
-        margin-left: -140px;
+        margin-left: -79px;
     }
 }
