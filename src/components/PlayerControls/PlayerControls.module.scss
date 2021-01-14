@@ -1,0 +1,34 @@
+.MenuContainer {
+    padding: 16px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+
+.MenuTitle {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.MenuButtonContainer {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Spacer {
+    width: 16px;
+    min-width: 8px;
+    display: inline-block;
+}
+
+.HitButton {
+    background-color: #417ef4;
+}
+
+.StayButton {
+    background-color: #ea8441;
+}
