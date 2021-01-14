@@ -1,0 +1,43 @@
+$small: 376px;
+
+.Container {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    background-color: #d8c42a;
+    border-radius: 4px;
+    height: 64px;
+    width: 280px;
+    box-shadow: 0px 2px 4px 0px #000000;
+    color: #000;
+
+    @media screen and (max-width: $small) {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+        border-radius: 0px;
+        box-shadow: 0px 2px 4px 0px #000000;
+    }
+}
+
+.ScoreItem {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.ScoreItemLabel {
+    padding-top: 2px;
+    margin-right: 2px;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.ScoreItemValue {
+    font-weight: 600;
+    font-size: 20px;
+}
