@@ -20,6 +20,12 @@ const ScoreBoard = ({ win, loose, push }) => {
     );
 };
 
+ScoreBoard.defaultProps = {
+    win: 0,
+    loose: 0,
+    push: 0
+};
+
 ScoreBoard.propTypes = {
     win: PropTypes.number.isRequired,
     loose: PropTypes.number.isRequired,

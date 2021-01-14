@@ -1,11 +1,7 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { PlayingCard } from '../PlayingCard/PlayingCard';
-
-import { Button } from '../shared/Button/Button';
-
-import { hit, stay } from '../../actions/actions';
 
 import styles from './BlackJackHand.module.scss';
 
@@ -14,7 +10,7 @@ const scoreVal = (player, showFirstCard) => (player.isDealer ? (showFirstCard ? 
 
 const BlackJackHand = ({ player, showFirstCard, dispatch }) => {
     return (
-        <div div className={styles.HandContainer}>
+        <div className={styles.HandContainer}>
             <div className={styles.ScoreContainer}>
                 <div className={styles.Score}>
                     {scoreVal(player, showFirstCard)}
@@ -30,6 +26,10 @@ const BlackJackHand = ({ player, showFirstCard, dispatch }) => {
             </div>
         </div>
     );
+};
+
+BlackJackHand.defaultProps = {
+    showFirstCard: true
 };
 
 BlackJackHand.propTypes = {

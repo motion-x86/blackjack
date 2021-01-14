@@ -10,7 +10,6 @@ import { NEW_GAME, HIT, STAY, UPDATE_SCORE_BOARD, hit, stay, newGame, updateScor
 import { getScore, postScore, gameOutcomes } from '../../api';
 
 import styles from './GameTable.module.scss';
-import { number } from 'prop-types';
 
 function init(scoreBoard) {
     const deck = new Deck();
