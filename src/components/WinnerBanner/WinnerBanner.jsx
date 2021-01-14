@@ -13,9 +13,9 @@ const WinnerBanner = ({ winner, onNewHandClick }) => {
             case DEALER:
                 return { type: 'critical', text: 'Dealer Wins' };
             case PLAYER_ONE:
-                return { type: 'success', text: 'Player Wins' };
+                return { type: 'success', text: 'Player 1 Wins!' };
             case PUSH:
-                return { type: 'default', text: 'Push', buttonClass: styles.PushButton };
+                return { type: 'default', text: 'Player 1 & Dealer Push', buttonClass: styles.PushButton };
             default:
                 return { type: 'default', text: '' };
         }
