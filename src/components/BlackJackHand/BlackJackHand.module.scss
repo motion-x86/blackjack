@@ -2,7 +2,14 @@
     position: relative;
     display: flex;
     justify-content: center;
-    background-color: #2f6f26;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.HandContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
     padding: 64px 48px;
 }
 
@@ -31,19 +38,6 @@
     }
 }
 
-.WinnerBannerContainer {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.MenuContainer {
-    padding: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .Cards {
     display: flex;
     padding: 16px 0;
@@ -55,18 +49,4 @@
     + .Card {
         margin-left: -140px;
     }
-}
-
-.Spacer {
-    width: 8px;
-    min-width: 8px;
-    display: inline-block;
-}
-
-.HitButton {
-    background-color: #417ef4;
-}
-
-.StayButton {
-    background-color: #ea8441;
 }
